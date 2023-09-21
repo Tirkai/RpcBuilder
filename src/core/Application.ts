@@ -5,6 +5,7 @@ import { IRpcRequestPayload } from "./IRpcRequestPayload.ts";
 import { RpcResponseError } from "./RpcResponseError.ts";
 import { ErrorMessageFactory } from "./ErrorMessageFactory.ts";
 import { IApplicationRunConfig } from "./IApplicationRunConfig.ts";
+import { globalConfig } from "../globalConfig.ts";
 
 export class Application {
   public instance: FastifyInstance;
@@ -21,7 +22,7 @@ export class Application {
 
   public run(config: IApplicationRunConfig) {
     this.instance.post<{ Body: IRpcRequestPayload }>(
-      "/rpc/api",
+      globalConfig.rpcApiEndpointPath,
       (request: FastifyRequest) => {
         const { module, handler, params } = request.body as IRpcRequestPayload;
 
@@ -53,7 +54,9 @@ export class Application {
       }
     );
 
-    this.instance.listen({ port: config.port }, () => {
+    const port = config.port;
+
+    this.instance.listen({ port }, () => {
       console.log(chalk.yellow(`Server started on ${config.port} port`));
     });
   }

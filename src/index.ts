@@ -3,6 +3,7 @@ import { bannerService } from "./BannerService.ts";
 import { BaseHandlerType } from "./core/BaseHandlerType.ts";
 import { Module } from "./core/Module.ts";
 import { ModuleHandler } from "./core/ModuleHandler.ts";
+import { globalConfig } from "./globalConfig.ts";
 
 class BannerModule extends Module {
   constructor() {
@@ -23,6 +24,10 @@ class App extends Application {
   }
 }
 
+await globalConfig.load();
+
+const { serverPort } = globalConfig;
+
 const myApp = new App();
 
-myApp.run({ port: 8080 });
+myApp.run({ port: serverPort });

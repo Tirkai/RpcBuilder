@@ -4,6 +4,7 @@
   },
   "imports": {
     "fastify": "npm:fastify@latest",
-    "chalk": "npm:chalk@latest"
+    "chalk": "npm:chalk@latest",
+    "dotenv": "https://deno.land/std@0.202.0/dotenv/mod.ts"
   }
 }
