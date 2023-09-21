@@ -21,6 +21,10 @@ export class Application {
   }
 
   public run(config: IApplicationRunConfig) {
+    this.instance.get("/", () => {
+      return "Server is running";
+    });
+
     this.instance.post<{ Body: IRpcRequestPayload }>(
       globalConfig.rpcApiEndpointPath,
       (request: FastifyRequest) => {
