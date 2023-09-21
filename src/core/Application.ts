@@ -22,7 +22,7 @@ export class Application {
 
   public run(config: IApplicationRunConfig) {
     this.instance.get("/", () => {
-      return "Server is running";
+      return `Server is running with configuration: ${JSON.stringify(globalConfig)}`;
     });
 
     this.instance.post<{ Body: IRpcRequestPayload }>(
